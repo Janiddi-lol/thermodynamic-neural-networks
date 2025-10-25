@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tnn-research"
+version = "0.0.1"
+description = "Research repo for Thermodynamic Neural Networks and early TASP core"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "sympy>=1.12",
+  "matplotlib>=3.8",
+]
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "jupyterlab>=4.0",
+  "ipykernel>=6.0",
+]
+[tool.setuptools.packages.find]
+where = ["src"]
