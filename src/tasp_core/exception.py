@@ -1,4 +1,7 @@
 import sys
+from tasp_core.logging_config import setup_logger
+
+logger = setup_logger("tasp.exceptions")
 
 def error_message_detail(error, error_detail:sys):
     _,_,exc_tb = error_detail.exc_info()
@@ -9,16 +12,18 @@ def error_message_detail(error, error_detail:sys):
 class CustomException(Exception):
     def __init__(self, error_message, error_detail:sys):
         super().__init__(error_message)
-        self.error_message = error_message_detail(error_message, error_detail=error_detail)
+        self.error_message = error_message_detail(error_message, error_detail)
+        # Auto-log the exception
+        logger.error(self.error_message)
         
     def __str__(self) -> str:
         return self.error_message
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
     
-#     try:
-#         a = 1/0
-#     except Exception as e:
-#         raise CustomException(e, sys)
+    try:
+        a = 1/0
+    except Exception as e:
+        raise CustomException(e, sys)
         
